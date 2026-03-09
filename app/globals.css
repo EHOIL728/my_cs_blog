@@ -10,6 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Fonts */
+  --font-pre-a: "Pretendard-ExtraBold", "sans-serif";
+  --font-pre-b: "Pretendard-SemiBold", "sans-serif";
+  --font-pre-c: "Pretendard-Medium", "sans-serif";
+  --font-pre-d: "Pretendard-ExtraLight", "sans-serif";
 }
 
 @media (prefers-color-scheme: dark) {
