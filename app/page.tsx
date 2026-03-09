@@ -35,7 +35,7 @@ export default function Home() {
             center.
           </p>
         </div>
-        <Link href="/posts/hello-world">
+        <Link href="/posts/hello-world.mdx">
           <button>포스트로 이동</button>
         </Link>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
