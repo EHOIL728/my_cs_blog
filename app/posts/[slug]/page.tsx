@@ -21,7 +21,7 @@ export default async function PostPage({
       <p className="text-gray-500">{data.data}</p>
       <hr />
       {}
-      <MDXRemot source={content} />
+      <MDXRemote source={content} />
     </article>
   );
 }
