@@ -8,7 +8,7 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const filePath = path.join(process.cwd(), "content", "${slug}.mdx");
   const fileContent = fs.readFileSync(filePath, "utf8");
