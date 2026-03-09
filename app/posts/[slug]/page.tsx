@@ -10,7 +10,7 @@ export default async function PostPage({
 }) {
   const { slug } = await params;
 
-  const filePath = path.join(process.cwd(), "content", "${slug}.mdx");
+  const filePath = path.join(process.cwd(), "content", `${slug}.mdx`);
   const fileContent = fs.readFileSync(filePath, "utf8");
 
   const { content, data } = matter(fileContent);
