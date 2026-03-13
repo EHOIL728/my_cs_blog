@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Header } from "./components/Header";
+import { HeroSection } from "./components/HeroSection";
+import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
 
-const myFont = localFont({
-  src: "../public/fonts/Pretendard-ExtraBold.otf",
-});
-
 export const metadata: Metadata = {
-  title: "홍익인간 2.0의 블로그",
-  description: "데이터로 널리 인간 세상을 이롭게 하기 위해",
+  title: "데이터 홍익인간",
+  description: "데이터, AI, 통계를 다루는 블로그",
 };
 
 export default function RootLayout({
@@ -17,13 +15,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body className={myFont.className}>
-        <header className="bg-blue-600 text-white p-4">
-          <h1 className="text-2xl">데홍익인간</h1>
-        </header>
-        {"데이터로 널리 인간 세상을 이롭게 하다."}
-        <main className="p-6">{children}</main>
+    <html lang="ko" suppressHydrationWarning>
+      <body>
+        <ThemeProvider>
+          <div className="min-h-screen bg-sky-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100">
+            <Header />
+            <HeroSection />
+            <main>{children}</main>
+
+            <footer className="border-t border-sky-200 dark:border-zinc-700 bg-sky-100 dark:bg-zinc-800 mt-12">
+              <div className="max-w-7xl mx-auto px-6 py-8">
+                <div className="flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-500">
+                  <p className="font-mono">
+                    © 2026 데이터 홍익인간. All rights reserved.
+                  </p>
+                  <p className="font-mono">
+                    Built with Next.js + TypeScript + Recharts
+                  </p>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
