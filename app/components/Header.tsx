@@ -1,7 +1,9 @@
-"use client";
-import { Github, Linkedin, Mail, BarChart3, Search, Menu } from "lucide-react";
-import { useState } from "react";
+﻿"use client";
+
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { BarChart3, Menu, Search } from "lucide-react";
+import { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -10,7 +12,6 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { Sidebar } from "./Sidebar";
-import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
@@ -18,105 +19,80 @@ export function Header() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!searchQuery.trim()) {
+      return;
     }
+
+    router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
   };
 
   return (
-    <header className="border-b border-zinc-700 dark:border-zinc-700 border-sky-200 bg-sky-50/80 dark:bg-zinc-900/95 backdrop-blur-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4">
+    <header className="sticky top-0 z-50 border-b border-sky-200 bg-sky-50/85 backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-900/95">
+      <div className="mx-auto max-w-7xl px-6 py-4">
         <div className="flex items-center justify-between gap-6">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-            <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-10 h-10 rounded-lg flex items-center justify-center">
-              <BarChart3 className="w-6 h-6 text-white" />
+          <Link href="/" className="flex flex-shrink-0 items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
+              <BarChart3 className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-mono text-zinc-900 dark:text-zinc-100">
-                데이터 홍익인간
+              <h1 className="font-mono text-xl text-zinc-900 dark:text-zinc-100">
+                Ty Archive
               </h1>
-              <p className="text-xs text-zinc-600 dark:text-zinc-500 font-mono">
-                데이터로 널리 인간 세상을 이롭게 하다
+              <p className="font-mono text-xs text-zinc-600 dark:text-zinc-500">
+                Notes on data, building, and learning
               </p>
             </div>
           </Link>
 
-          {/* Search Bar */}
-          <form
-            onSubmit={handleSearch}
-            className="flex-1 max-w-md hidden md:block"
-          >
+          <form onSubmit={handleSearch} className="hidden max-w-md flex-1 md:block">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 dark:text-zinc-500 text-sky-600" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sky-600" />
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="포스트 검색..."
-                className="w-full bg-white dark:bg-zinc-800 border border-sky-200 dark:border-zinc-700 rounded-lg pl-10 pr-4 py-2 text-sm text-zinc-900 dark:text-zinc-200 placeholder-zinc-500 dark:placeholder-zinc-500 placeholder:text-sky-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="관심 있는 주제를 검색해보세요"
+                className="w-full rounded-xl border border-sky-200 bg-white py-2 pr-4 pl-10 text-sm text-zinc-900 transition-colors placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
               />
             </div>
           </form>
 
-          {/* Navigation */}
           <nav className="flex items-center gap-6">
             <Link
-              href="/"
-              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hidden lg:block"
+              href="/posts"
+              className="hidden text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 lg:block"
             >
               Posts
             </Link>
             <Link
-              href="#"
-              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hidden lg:block"
+              href="/#projects"
+              className="hidden text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 lg:block"
             >
               Projects
             </Link>
             <Link
-              href="#"
-              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hidden lg:block"
+              href="/#about"
+              className="hidden text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 lg:block"
             >
               About
             </Link>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-3 ml-4">
-              <Link
-                href="#"
-                className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hidden sm:block"
-              >
-                <Github className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hidden sm:block"
-              >
-                <Linkedin className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors hidden sm:block"
-              >
-                <Mail className="w-5 h-5" />
-              </Link>
-
-              {/* Theme Toggle */}
+            <div className="ml-4 flex items-center gap-3">
               <ThemeToggle />
 
-              {/* Sidebar Toggle */}
               <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
                 <SheetTrigger asChild>
-                  <button className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors p-2 hover:bg-sky-100 dark:hover:bg-zinc-800 rounded-lg">
-                    <Menu className="w-5 h-5" />
+                  <button className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-sky-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100">
+                    <Menu className="h-5 w-5" />
                   </button>
                 </SheetTrigger>
-                <SheetContent className="bg-sky-50 dark:bg-zinc-900 border-sky-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100">
+                <SheetContent className="border-sky-200 bg-sky-50 text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100">
                   <SheetHeader>
                     <SheetTitle className="text-zinc-900 dark:text-zinc-100">
-                      메뉴
+                      Menu
                     </SheetTitle>
                   </SheetHeader>
                   <Sidebar onClose={() => setSidebarOpen(false)} />
@@ -126,16 +102,15 @@ export function Header() {
           </nav>
         </div>
 
-        {/* Mobile Search Bar */}
         <form onSubmit={handleSearch} className="mt-4 md:hidden">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 dark:text-zinc-500 text-sky-600" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sky-600" />
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="포스트 검색..."
-              className="w-full bg-white dark:bg-zinc-800 border border-sky-200 dark:border-zinc-700 rounded-lg pl-10 pr-4 py-2 text-sm text-zinc-900 dark:text-zinc-200 placeholder-zinc-500 dark:placeholder-zinc-500 placeholder:text-sky-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="관심 있는 주제를 검색해보세요"
+              className="w-full rounded-xl border border-sky-200 bg-white py-2 pr-4 pl-10 text-sm text-zinc-900 transition-colors placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
             />
           </div>
         </form>

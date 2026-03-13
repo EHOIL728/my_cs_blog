@@ -1,23 +1,26 @@
-import { GraduationCap, MapPin, Code2 } from "lucide-react";
+﻿import { Code2, GraduationCap, MapPin } from "lucide-react";
 
 export function AboutCard() {
   return (
-    <div className="bg-white dark:bg-zinc-800 border border-sky-200 dark:border-zinc-700 rounded-lg p-6">
-      <h3 className="text-zinc-900 dark:text-zinc-100 mb-4 flex items-center gap-2">
-        <span className="text-blue-600 dark:text-blue-400 font-mono">&gt;</span>
+    <div
+      id="about"
+      className="rounded-[1.5rem] border border-sky-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800"
+    >
+      <h3 className="mb-4 flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
+        <span className="font-mono text-blue-600 dark:text-blue-400">&gt;</span>
         About Me
       </h3>
 
       <div className="space-y-4">
         <div className="flex items-center gap-3">
-          <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl">
-            👨‍💻
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 text-xl font-semibold text-white">
+            TY
           </div>
           <div>
-            <p className="text-zinc-900 dark:text-zinc-200 font-medium">
-              데이터 분석가
+            <p className="font-medium text-zinc-900 dark:text-zinc-200">
+              데이터로 설명하는 개발자
             </p>
-            <p className="text-zinc-600 dark:text-zinc-500 text-sm">
+            <p className="text-sm text-zinc-600 dark:text-zinc-500">
               Data Analyst & Developer
             </p>
           </div>
@@ -25,44 +28,44 @@ export function AboutCard() {
 
         <div className="space-y-3 pt-2">
           <div className="flex items-start gap-3 text-sm">
-            <GraduationCap className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+            <GraduationCap className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />
             <div>
               <p className="text-zinc-800 dark:text-zinc-300">
-                홍익대학교 재학중
+                컴퓨터공학과 데이터 분석을 함께 공부 중
               </p>
-              <p className="text-zinc-600 dark:text-zinc-500 text-xs mt-0.5">
-                데이터 분석 전공
+              <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-500">
+                이론보다 손으로 직접 부딪히는 쪽에 가깝습니다
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-3 text-sm">
-            <Code2 className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+            <Code2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />
             <div>
               <p className="text-zinc-800 dark:text-zinc-300">
-                데이터로 문제 해결
+                분석부터 제품화까지 연결하는 흐름에 관심
               </p>
-              <p className="text-zinc-600 dark:text-zinc-500 text-xs mt-0.5">
-                분석부터 시각화까지
+              <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-500">
+                Python, SQL, 시각화, 간단한 프론트엔드까지 다룹니다
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-3 text-sm">
-            <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+            <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />
             <div>
               <p className="text-zinc-800 dark:text-zinc-300">Seoul, Korea</p>
-              <p className="text-zinc-600 dark:text-zinc-500 text-xs mt-0.5">
-                원격 근무 가능
+              <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-500">
+                원격 협업과 기록 중심 작업을 선호합니다
               </p>
             </div>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-sky-200 dark:border-zinc-700">
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
-            데이터로 세상을 이롭게 만드는 것이 목표입니다. 복잡한 데이터를
-            이해하기 쉬운 인사이트로 변환하는 것을 좋아합니다.
+        <div className="border-t border-sky-200 pt-4 dark:border-zinc-700">
+          <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            숫자와 로그 뒤에 숨어 있는 맥락을 읽어내고, 복잡한 내용을
+            이해하기 쉬운 글과 화면으로 바꾸는 과정을 좋아합니다.
           </p>
         </div>
       </div>

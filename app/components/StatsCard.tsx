@@ -1,4 +1,4 @@
-import { LucideIcon } from "lucide-react";
+﻿import { LucideIcon } from "lucide-react";
 
 interface StatsCardProps {
   title: string;
@@ -16,25 +16,21 @@ export function StatsCard({
   trendUp,
 }: StatsCardProps) {
   return (
-    <div className="bg-white dark:bg-zinc-800 border border-sky-200 dark:border-zinc-700 rounded-lg p-6 hover:border-sky-300 dark:hover:border-zinc-600 transition-colors">
+    <div className="rounded-[1.5rem] border border-sky-200 bg-white p-6 transition-colors hover:border-sky-300 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:border-zinc-600">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-1">
-            {title}
-          </p>
-          <p className="text-3xl text-zinc-900 dark:text-zinc-100 font-mono">
-            {value}
-          </p>
-          {trend && (
+          <p className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">{title}</p>
+          <p className="font-mono text-3xl text-zinc-900 dark:text-zinc-100">{value}</p>
+          {trend ? (
             <p
-              className={`text-sm mt-2 ${trendUp ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+              className={`mt-2 text-sm ${trendUp ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
             >
-              {trendUp ? "↑" : "↓"} {trend}
+              {trendUp ? "Up" : "Down"} {trend}
             </p>
-          )}
+          ) : null}
         </div>
-        <div className="bg-sky-100 dark:bg-zinc-700 p-3 rounded-lg">
-          <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+        <div className="rounded-xl bg-sky-100 p-3 dark:bg-zinc-700">
+          <Icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
         </div>
       </div>
     </div>

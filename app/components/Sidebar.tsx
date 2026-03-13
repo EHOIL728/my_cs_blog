@@ -1,6 +1,8 @@
+﻿"use client";
+
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface Category {
   name: string;
@@ -30,23 +32,12 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Data Engineering",
-    slug: "data-engineering",
-    subcategories: [
-      { name: "Apache Spark", slug: "apache-spark" },
-      { name: "Kafka", slug: "kafka" },
-      { name: "Airflow", slug: "airflow" },
-      { name: "ETL Pipeline", slug: "etl-pipeline" },
-    ],
-  },
-  {
     name: "Visualization",
     slug: "visualization",
     subcategories: [
       { name: "Matplotlib", slug: "matplotlib" },
       { name: "Seaborn", slug: "seaborn" },
       { name: "Plotly", slug: "plotly" },
-      { name: "D3.js", slug: "d3js" },
     ],
   },
   {
@@ -55,18 +46,7 @@ const categories: Category[] = [
     subcategories: [
       { name: "SQL", slug: "sql" },
       { name: "PostgreSQL", slug: "postgresql" },
-      { name: "MongoDB", slug: "mongodb" },
       { name: "Query Optimization", slug: "query-optimization" },
-    ],
-  },
-  {
-    name: "Statistics",
-    slug: "statistics",
-    subcategories: [
-      { name: "A/B Testing", slug: "ab-testing" },
-      { name: "Hypothesis Testing", slug: "hypothesis-testing" },
-      { name: "Regression Analysis", slug: "regression-analysis" },
-      { name: "Probability", slug: "probability" },
     ],
   },
 ];
@@ -83,10 +63,7 @@ export function Sidebar({ onClose }: SidebarProps) {
     setExpandedCategory(expandedCategory === slug ? null : slug);
   };
 
-  const handleSubcategoryClick = (
-    categorySlug: string,
-    subcategorySlug: string,
-  ) => {
+  const handleSubcategoryClick = (categorySlug: string, subcategorySlug: string) => {
     router.push(`/category/${categorySlug}/${subcategorySlug}`);
     onClose();
   };
@@ -98,28 +75,28 @@ export function Sidebar({ onClose }: SidebarProps) {
 
   return (
     <div className="py-6">
-      <h2 className="text-xl mb-6 px-6 flex items-center gap-2">
-        <span className="text-blue-400 font-mono">&gt;</span>
-        카테고리
+      <h2 className="mb-6 flex items-center gap-2 px-6 text-xl">
+        <span className="font-mono text-blue-600 dark:text-blue-400">&gt;</span>
+        Categories
       </h2>
 
       <div className="space-y-2">
         {categories.map((category) => (
           <div key={category.slug}>
-            <div className="px-6 py-3 hover:bg-zinc-800 transition-colors">
+            <div className="px-6 py-3 transition-colors hover:bg-sky-100 dark:hover:bg-zinc-800">
               <div className="flex items-center justify-between">
                 <button
                   onClick={() => handleCategoryClick(category.slug)}
-                  className="flex-1 text-left text-zinc-200 hover:text-blue-400 transition-colors"
+                  className="flex-1 text-left text-zinc-700 transition-colors hover:text-blue-600 dark:text-zinc-200 dark:hover:text-blue-400"
                 >
                   {category.name}
                 </button>
                 <button
                   onClick={() => toggleCategory(category.slug)}
-                  className="text-zinc-400 hover:text-zinc-200 transition-colors"
+                  className="text-zinc-400 transition-colors hover:text-zinc-700 dark:hover:text-zinc-200"
                 >
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform ${
+                    className={`h-4 w-4 transition-transform ${
                       expandedCategory === category.slug ? "rotate-180" : ""
                     }`}
                   />
@@ -127,21 +104,21 @@ export function Sidebar({ onClose }: SidebarProps) {
               </div>
             </div>
 
-            {expandedCategory === category.slug && (
-              <div className="bg-zinc-900 py-2">
-                {category.subcategories.map((sub) => (
+            {expandedCategory === category.slug ? (
+              <div className="bg-sky-50 py-2 dark:bg-zinc-900">
+                {category.subcategories.map((subcategory) => (
                   <button
-                    key={sub.slug}
+                    key={subcategory.slug}
                     onClick={() =>
-                      handleSubcategoryClick(category.slug, sub.slug)
+                      handleSubcategoryClick(category.slug, subcategory.slug)
                     }
-                    className="w-full text-left px-12 py-2 text-sm text-zinc-400 hover:text-blue-400 hover:bg-zinc-800 transition-colors"
+                    className="w-full px-12 py-2 text-left text-sm text-zinc-500 transition-colors hover:bg-sky-100 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-blue-400"
                   >
-                    {sub.name}
+                    {subcategory.name}
                   </button>
                 ))}
               </div>
-            )}
+            ) : null}
           </div>
         ))}
       </div>

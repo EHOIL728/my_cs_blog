@@ -1,46 +1,44 @@
-"use client";
+﻿"use client";
+
 import {
-  LineChart,
+  CartesianGrid,
   Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { month: "Jan", posts: 4, views: 1200 },
-  { month: "Feb", posts: 6, views: 2400 },
-  { month: "Mar", posts: 5, views: 2100 },
-  { month: "Apr", posts: 8, views: 3200 },
-  { month: "May", posts: 7, views: 2800 },
-  { month: "Jun", posts: 9, views: 3600 },
-];
+type ActivityPoint = {
+  month: string;
+  posts: number;
+  topics: number;
+};
 
-export function ActivityChart() {
+interface ActivityChartProps {
+  data: ActivityPoint[];
+}
+
+export function ActivityChart({ data }: ActivityChartProps) {
   return (
-    <div className="bg-white dark:bg-zinc-800 border border-sky-200 dark:border-zinc-700 rounded-lg p-6">
-      <h3 className="text-zinc-900 dark:text-zinc-100 mb-6 flex items-center gap-2">
-        <span className="text-blue-600 dark:text-blue-400 font-mono">&gt;</span>
+    <div className="rounded-[1.5rem] border border-sky-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
+      <h3 className="mb-6 flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
+        <span className="font-mono text-blue-600 dark:text-blue-400">&gt;</span>
         Activity Overview
       </h3>
 
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#3f3f46" />
-          <XAxis
-            dataKey="month"
-            stroke="#71717a"
-            style={{ fontSize: "12px" }}
-          />
-          <YAxis stroke="#71717a" style={{ fontSize: "12px" }} />
+          <CartesianGrid stroke="#cbd5e1" strokeDasharray="3 3" />
+          <XAxis dataKey="month" stroke="#64748b" style={{ fontSize: "12px" }} />
+          <YAxis stroke="#64748b" style={{ fontSize: "12px" }} />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#27272a",
-              border: "1px solid #52525b",
-              borderRadius: "8px",
-              color: "#e4e4e7",
+              backgroundColor: "#ffffff",
+              border: "1px solid #cbd5e1",
+              borderRadius: "12px",
+              color: "#0f172a",
             }}
           />
           <Line
@@ -52,7 +50,7 @@ export function ActivityChart() {
           />
           <Line
             type="monotone"
-            dataKey="views"
+            dataKey="topics"
             stroke="#10b981"
             strokeWidth={2}
             dot={{ fill: "#10b981", r: 4 }}
@@ -60,14 +58,14 @@ export function ActivityChart() {
         </LineChart>
       </ResponsiveContainer>
 
-      <div className="flex items-center gap-6 mt-4 text-sm">
+      <div className="mt-4 flex items-center gap-6 text-sm">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-          <span className="text-zinc-400">Posts</span>
+          <div className="h-3 w-3 rounded-full bg-blue-500" />
+          <span className="text-zinc-500 dark:text-zinc-400">Posts</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-          <span className="text-zinc-400">Views (×100)</span>
+          <div className="h-3 w-3 rounded-full bg-green-500" />
+          <span className="text-zinc-500 dark:text-zinc-400">Topics</span>
         </div>
       </div>
     </div>
