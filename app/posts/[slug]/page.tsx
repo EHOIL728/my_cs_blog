@@ -35,10 +35,18 @@ export default async function PostDetailPage({ params }: PageProps) {
       </Link>
 
       <article className="mt-8 rounded-[2rem] border border-sky-200 bg-white/90 px-8 py-10 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
-        <div className="mb-4">
+        <div className="mb-4 flex flex-wrap gap-2">
           <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-sm font-mono text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-300">
             {meta.category}
           </span>
+          {meta.project ? (
+            <Link
+              href={`/projects/${slugify(meta.project)}`}
+              className="inline-flex rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-sm text-zinc-700 transition-colors hover:border-sky-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+            >
+              Project: {meta.project}
+            </Link>
+          ) : null}
         </div>
 
         <h1 className="text-4xl leading-tight text-zinc-900 dark:text-zinc-100 md:text-5xl">

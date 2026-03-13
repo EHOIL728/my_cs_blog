@@ -41,7 +41,7 @@ export function HeroSection() {
               글 보러가기
             </Link>
             <Link
-              href="/#projects"
+              href="/projects"
               className="rounded-lg border border-sky-300 bg-white/50 px-6 py-3 text-zinc-900 transition-colors hover:border-sky-400 dark:border-zinc-700 dark:bg-transparent dark:text-zinc-300 dark:hover:border-zinc-600"
             >
               프로젝트 보기

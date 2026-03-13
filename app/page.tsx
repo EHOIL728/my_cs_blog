@@ -1,11 +1,11 @@
 ﻿import Link from "next/link";
-import { BarChart3, Code2, FileText, Tags } from "lucide-react";
+import { BarChart3, CalendarDays, FileText, FolderKanban } from "lucide-react";
 import { AboutCard } from "./components/AboutCard";
 import { ActivityChart } from "./components/ActivityChart";
 import { BlogPost } from "./components/BlogPost";
 import { ProjectCard } from "./components/ProjectCard";
 import { StatsCard } from "./components/StatsCard";
-import { getAllPosts, slugify } from "@/lib/posts";
+import { getAllPosts, getAllProjects, slugify } from "@/lib/posts";
 
 function normalizeMonth(date: string) {
   const cleaned = date.replace(/\./g, "-");
@@ -19,12 +19,13 @@ function formatMonth(month: string) {
 
 export default async function Home() {
   const posts = await getAllPosts();
+  const projects = await getAllProjects();
   const recentPosts = posts.slice(0, 3);
   const featuredPosts = posts.filter((post) => post.meta.featured).slice(0, 2);
   const fallbackFeatured =
     featuredPosts.length > 0 ? featuredPosts : posts.slice(0, 2);
-  const categories = new Set(posts.map((post) => post.meta.category));
-  const totalTags = new Set(posts.flatMap((post) => post.meta.tags));
+  const projectPosts = posts.filter((post) => post.meta.project);
+  const latestUpdate = posts[0]?.meta.date ?? "-";
 
   const monthlyMap = new Map<string, { month: string; posts: number; topics: number }>();
   for (const post of posts) {
@@ -43,21 +44,6 @@ export default async function Home() {
     .sort(([left], [right]) => left.localeCompare(right))
     .map(([, value]) => value);
 
-  const projects = [
-    {
-      title: "Personal Blog Refresh",
-      description:
-        "MDX 기반 블로그를 정리하면서 라우팅, 검색, 카테고리 탐색 흐름을 다시 설계한 작업입니다.",
-      tags: ["Next.js", "MDX", "Tailwind"],
-    },
-    {
-      title: "Study Notes Dashboard",
-      description:
-        "학습 기록을 글, 태그, 월별 활동으로 한 번에 훑어볼 수 있도록 아카이브 형태로 정리했습니다.",
-      tags: ["TypeScript", "Recharts", "UX"],
-    },
-  ];
-
   return (
     <div>
       <section className="border-b border-sky-200 bg-white/50 dark:border-zinc-700 dark:bg-zinc-800/30">
@@ -67,28 +53,28 @@ export default async function Home() {
               title="Total Posts"
               value={String(posts.length)}
               icon={FileText}
-              trend="new archive structure"
-              trendUp={true}
-            />
-            <StatsCard
-              title="Categories"
-              value={String(categories.size)}
-              icon={Code2}
-              trend="organized from MDX"
-              trendUp={true}
-            />
-            <StatsCard
-              title="Total Tags"
-              value={String(totalTags.size)}
-              icon={Tags}
-              trend="connected by topics"
+              trend="published articles"
               trendUp={true}
             />
             <StatsCard
               title="Projects"
               value={String(projects.length)}
+              icon={FolderKanban}
+              trend="grouped from MDX"
+              trendUp={true}
+            />
+            <StatsCard
+              title="Project Posts"
+              value={String(projectPosts.length)}
               icon={BarChart3}
-              trend="curated showcase"
+              trend="connected to portfolio"
+              trendUp={true}
+            />
+            <StatsCard
+              title="Latest Update"
+              value={latestUpdate}
+              icon={CalendarDays}
+              trend="most recent post"
               trendUp={true}
             />
           </div>
@@ -162,11 +148,26 @@ export default async function Home() {
                   </span>
                   Projects
                 </h2>
+                <Link
+                  href="/projects"
+                  className="font-mono text-sm text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  browse projects
+                </Link>
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {projects.map((project) => (
-                  <ProjectCard key={project.title} {...project} />
+                {projects.slice(0, 4).map((project) => (
+                  <ProjectCard
+                    key={project.slug}
+                    title={project.name}
+                    description={project.summary}
+                    tags={project.tags}
+                    href={`/projects/${project.slug}`}
+                    postCount={project.postCount}
+                    updatedAt={project.updatedAt}
+                    githubUrl={project.repoUrl}
+                  />
                 ))}
               </div>
             </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BarChart3, Menu, Search } from "lucide-react";
+import { BarChart3, Github, Linkedin, Menu, Search } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -13,6 +13,11 @@ import {
 } from "./ui/sheet";
 import { Sidebar } from "./Sidebar";
 import { ThemeToggle } from "./ThemeToggle";
+
+const socialLinks = {
+  github: "https://github.com/your-username",
+  linkedin: "https://www.linkedin.com/in/your-profile",
+};
 
 export function Header() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -68,19 +73,34 @@ export function Header() {
               Posts
             </Link>
             <Link
-              href="/#projects"
+              href="/projects"
               className="hidden text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 lg:block"
             >
               Projects
             </Link>
-            <Link
-              href="/#about"
-              className="hidden text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 lg:block"
-            >
-              About
-            </Link>
 
-            <div className="ml-4 flex items-center gap-3">
+            <div className="ml-2 hidden items-center gap-2 sm:flex">
+              <a
+                href={socialLinks.github}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-sky-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+                aria-label="GitHub"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-sky-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
+
+            <div className="ml-2 flex items-center gap-3">
               <ThemeToggle />
 
               <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
