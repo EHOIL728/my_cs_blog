@@ -5,7 +5,23 @@ import { ActivityChart } from "./components/ActivityChart";
 import { BlogPost } from "./components/BlogPost";
 import { ProjectCard } from "./components/ProjectCard";
 import { StatsCard } from "./components/StatsCard";
-import { getAllPosts, getAllProjects, slugify } from "@/lib/posts";
+import { getAllPosts, getAllProjects } from "@/lib/posts";
+
+const focusAreas = [
+  "SQL",
+  "PostgreSQL",
+  "Python",
+  "Pandas",
+  "ELT Pipeline",
+  "ETL Pipeline",
+  "Data Engineering",
+  "Books",
+  "Next.js",
+  "MDX",
+  "React",
+  "Vite",
+  "FastAPI",
+];
 
 function normalizeMonth(date: string) {
   const cleaned = date.replace(/\./g, "-");
@@ -185,20 +201,14 @@ export default async function Home() {
               </h3>
 
               <div className="flex flex-wrap gap-2">
-                {Array.from(new Set(posts.flatMap((post) => post.meta.tags))).map(
-                  (tag) => (
-                    <Link
-                      key={tag}
-                      href={`/category/${slugify(
-                        posts.find((post) => post.meta.tags.includes(tag))?.meta
-                          .category ?? "general",
-                      )}/${slugify(tag)}`}
-                      className="cursor-pointer rounded-full border border-sky-200 bg-sky-100 px-3 py-1 text-xs text-zinc-800 transition-colors hover:border-sky-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-500"
-                    >
-                      {tag}
-                    </Link>
-                  ),
-                )}
+                {focusAreas.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-sky-200 bg-sky-100 px-3 py-1 text-xs text-zinc-800 dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-200"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
 

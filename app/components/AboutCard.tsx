@@ -18,10 +18,10 @@ export function AboutCard() {
           </div>
           <div>
             <p className="font-medium text-zinc-900 dark:text-zinc-200">
-              데이터로 설명하는 개발자
+              데이터로 세상을 이롭게 하는 엔지니어
             </p>
             <p className="text-sm text-zinc-600 dark:text-zinc-500">
-              Data Analyst & Developer
+              Aspiring Data Engineer
             </p>
           </div>
         </div>
@@ -31,7 +31,7 @@ export function AboutCard() {
             <GraduationCap className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />
             <div>
               <p className="text-zinc-800 dark:text-zinc-300">
-                컴퓨터공학과 데이터 분석을 함께 공부 중
+                컴퓨터공학 전공, 데이터 엔지니어링 집중
               </p>
               <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-500">
                 이론보다 손으로 직접 부딪히는 쪽에 가깝습니다
@@ -43,10 +43,10 @@ export function AboutCard() {
             <Code2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />
             <div>
               <p className="text-zinc-800 dark:text-zinc-300">
-                분석부터 제품화까지 연결하는 흐름에 관심
+                파이프라인 설계부터 운영까지 관심
               </p>
               <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-500">
-                Python, SQL, 시각화, 간단한 프론트엔드까지 다룹니다
+                Python, SQL, PostgreSQL, Pipeline
               </p>
             </div>
           </div>
@@ -64,8 +64,8 @@ export function AboutCard() {
 
         <div className="border-t border-sky-200 pt-4 dark:border-zinc-700">
           <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            숫자와 로그 뒤에 숨어 있는 맥락을 읽어내고, 복잡한 내용을
-            이해하기 쉬운 글과 화면으로 바꾸는 과정을 좋아합니다.
+            직접 설계하고 부딪히며 배웁니다. 개념은 구현으로, 구현은 기록으로
+            남깁니다.
           </p>
         </div>
       </div>
