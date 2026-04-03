@@ -1,8 +1,9 @@
 ﻿"use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BarChart3, Github, Linkedin, Menu, Search } from "lucide-react";
+import { Github, Linkedin, Menu, Search } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -37,16 +38,26 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-sky-200 bg-sky-50/85 backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-900/95">
       <div className="mx-auto max-w-7xl px-6 py-4">
-        <div className="flex items-center justify-between gap-6">
-          <Link href="/" className="flex flex-shrink-0 items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
-              <BarChart3 className="h-6 w-6 text-white" />
+        <div className="flex items-start justify-between gap-4">
+          <Link href="/" className="flex min-w-0 flex-shrink items-center gap-3">
+            <div className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800">
+              <Image
+                src="/dehongikingan_icon.svg"
+                alt="데홍익인간 로고"
+                width={52}
+                height={52}
+                className="h-11 w-11 object-cover sm:h-13 sm:w-13"
+                priority
+              />
             </div>
-            <div>
-              <h1 className="font-mono text-xl text-zinc-900 dark:text-zinc-100">
+            <div className="min-w-0">
+              <p className="mb-1 hidden font-mono text-[10px] uppercase tracking-[0.45em] text-blue-600 dark:text-blue-400 sm:block">
+                D E H O N G
+              </p>
+              <h1 className="truncate text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-xl">
                 데홍익인간
               </h1>
-              <p className="font-mono text-xs text-zinc-600 dark:text-zinc-500">
+              <p className="mt-1 line-clamp-1 text-[11px] text-zinc-600 dark:text-zinc-500 sm:text-xs">
                 데이터로 인간 세상을 널리 이롭게 하다
               </p>
             </div>
@@ -65,7 +76,7 @@ export function Header() {
             </div>
           </form>
 
-          <nav className="flex items-center gap-6">
+          <nav className="flex flex-shrink-0 items-center gap-3 sm:gap-6">
             <Link
               href="/posts"
               className="hidden text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 lg:block"

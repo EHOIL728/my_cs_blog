@@ -56,7 +56,7 @@ export function AboutCard() {
             <div>
               <p className="text-zinc-800 dark:text-zinc-300">Seoul, Korea</p>
               <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-500">
-                원격 협업과 기록 중심 작업을 선호합니다
+                협업을 좋아하고, 배운 것은 꾸준히 기록합니다
               </p>
             </div>
           </div>

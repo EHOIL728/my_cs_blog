@@ -62,7 +62,7 @@ export default async function Home() {
     <div>
       <section className="border-b border-sky-200 bg-white/50 dark:border-zinc-700 dark:bg-zinc-800/30">
         <div className="mx-auto max-w-7xl px-6 py-12">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <StatsCard
               title="Total Posts"
               value={String(posts.length)}
