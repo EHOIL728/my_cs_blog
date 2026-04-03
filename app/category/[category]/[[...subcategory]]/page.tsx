@@ -23,6 +23,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const posts = await getAllPosts();
   const filtered = posts.filter((post) => {
+    if (post.meta.project) {
+      return false;
+    }
+
     const categoryMatches = slugify(post.meta.category) === category;
     const tagMatches = tagSlug
       ? post.meta.tags.some((tag) => slugify(tag) === tagSlug)

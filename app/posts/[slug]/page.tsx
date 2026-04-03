@@ -72,15 +72,24 @@ export default async function PostDetailPage({ params }: PageProps) {
 
         {meta.tags.length > 0 ? (
           <div className="mt-6 flex flex-wrap gap-2">
-            {meta.tags.map((tag) => (
-              <Link
-                key={tag}
-                href={`/category/${slugify(meta.category)}/${slugify(tag)}`}
-                className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs text-zinc-700 transition-colors hover:border-sky-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:border-zinc-600"
-              >
-                #{tag}
-              </Link>
-            ))}
+            {meta.tags.map((tag) =>
+              meta.category === "Projects" ? (
+                <span
+                  key={tag}
+                  className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                >
+                  #{tag}
+                </span>
+              ) : (
+                <Link
+                  key={tag}
+                  href={`/category/${slugify(meta.category)}/${slugify(tag)}`}
+                  className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs text-zinc-700 transition-colors hover:border-sky-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:border-zinc-600"
+                >
+                  #{tag}
+                </Link>
+              ),
+            )}
           </div>
         ) : null}
 
