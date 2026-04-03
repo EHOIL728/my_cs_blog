@@ -44,10 +44,10 @@ export function Header() {
             </div>
             <div>
               <h1 className="font-mono text-xl text-zinc-900 dark:text-zinc-100">
-                Ty Archive
+                데홍익인간
               </h1>
               <p className="font-mono text-xs text-zinc-600 dark:text-zinc-500">
-                Notes on data, building, and learning
+                데이터로 인간 세상을 널리 이롭게 하다
               </p>
             </div>
           </Link>

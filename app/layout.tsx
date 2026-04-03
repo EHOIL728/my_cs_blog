@@ -33,8 +33,8 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Ty Archive",
-  description: "데이터와 개발에 대한 기록을 남기는 개인 블로그",
+  title: "데홍익인간",
+  description: "데이터로 세상을 이롭게, 그 과정을 기록하는 개인 블로그",
 };
 
 export default function RootLayout({
@@ -54,7 +54,7 @@ export default function RootLayout({
             <footer className="mt-12 border-t border-sky-200 bg-sky-100 dark:border-zinc-700 dark:bg-zinc-800">
               <div className="mx-auto max-w-7xl px-6 py-8">
                 <div className="flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-500">
-                  <p className="font-mono">2026 Ty Archive. All rights reserved.</p>
+                  <p className="font-mono">2026 데홍익인간. All rights reserved.</p>
                   <p className="font-mono">Built with Next.js, MDX, and Tailwind CSS</p>
                 </div>
               </div>
