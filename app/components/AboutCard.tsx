@@ -34,7 +34,7 @@ export function AboutCard() {
                 컴퓨터공학 전공, 데이터 엔지니어링 집중
               </p>
               <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-500">
-                이론보다 손으로 직접 부딪히는 쪽에 가깝습니다
+                이론과 실행을 함께 중요하게 생각합니다
               </p>
             </div>
           </div>
