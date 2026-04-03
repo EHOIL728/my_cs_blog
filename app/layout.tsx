@@ -46,12 +46,12 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className={pretendard.variable}>
         <ThemeProvider>
-          <div className="min-h-screen bg-sky-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+          <div className="min-h-screen bg-slate-50 text-zinc-900 dark:bg-[#111318] dark:text-zinc-100">
             <Header />
             <HeroSection />
             <main>{children}</main>
 
-            <footer className="mt-12 border-t border-sky-200 bg-sky-100 dark:border-zinc-700 dark:bg-zinc-800">
+            <footer className="mt-12 border-t border-sky-200 bg-slate-100 dark:border-zinc-700 dark:bg-[#171a20]">
               <div className="mx-auto max-w-7xl px-6 py-8">
                 <div className="flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-500">
                   <p className="font-mono">2026 데홍익인간. All rights reserved.</p>

@@ -1,10 +1,11 @@
 ﻿import Link from "next/link";
-import { BarChart3, CalendarDays, FileText, FolderKanban } from "lucide-react";
+import { BookOpen, CalendarDays, FileText, FolderKanban } from "lucide-react";
 import { AboutCard } from "./components/AboutCard";
 import { ActivityChart } from "./components/ActivityChart";
 import { BlogPost } from "./components/BlogPost";
 import { ProjectCard } from "./components/ProjectCard";
 import { StatsCard } from "./components/StatsCard";
+import { getCategoryConfig } from "@/lib/categories";
 import { getAllPosts, getAllProjects } from "@/lib/posts";
 
 const focusAreas = [
@@ -37,10 +38,7 @@ export default async function Home() {
   const posts = await getAllPosts();
   const projects = await getAllProjects();
   const recentPosts = posts.slice(0, 3);
-  const featuredPosts = posts.filter((post) => post.meta.featured).slice(0, 2);
-  const fallbackFeatured =
-    featuredPosts.length > 0 ? featuredPosts : posts.slice(0, 2);
-  const projectPosts = posts.filter((post) => post.meta.project);
+  const booksCount = getCategoryConfig("books")?.subcategories.length ?? 0;
   const latestUpdate = posts[0]?.meta.date ?? "-";
 
   const monthlyMap = new Map<string, { month: string; posts: number; topics: number }>();
@@ -69,29 +67,21 @@ export default async function Home() {
               title="Total Posts"
               value={String(posts.length)}
               icon={FileText}
-              trend="published articles"
-              trendUp={true}
             />
             <StatsCard
               title="Projects"
               value={String(projects.length)}
               icon={FolderKanban}
-              trend="grouped from MDX"
-              trendUp={true}
             />
             <StatsCard
-              title="Project Posts"
-              value={String(projectPosts.length)}
-              icon={BarChart3}
-              trend="connected to portfolio"
-              trendUp={true}
+              title="Books"
+              value={String(booksCount)}
+              icon={BookOpen}
             />
             <StatsCard
               title="Latest Update"
               value={latestUpdate}
               icon={CalendarDays}
-              trend="most recent post"
-              trendUp={true}
             />
           </div>
         </div>
@@ -118,31 +108,6 @@ export default async function Home() {
 
               <div className="grid gap-6">
                 {recentPosts.map((post) => (
-                  <BlogPost
-                    key={post.meta.slug}
-                    href={`/posts/${post.meta.slug}`}
-                    title={post.meta.title}
-                    excerpt={post.meta.excerpt}
-                    date={post.meta.date}
-                    readTime={post.meta.readTime ?? "5 min"}
-                    category={post.meta.category}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="flex items-center gap-2 text-2xl text-zinc-900 dark:text-zinc-100">
-                  <span className="font-mono text-blue-600 dark:text-blue-400">
-                    &gt;
-                  </span>
-                  Featured Posts
-                </h2>
-              </div>
-
-              <div className="grid gap-6">
-                {fallbackFeatured.map((post) => (
                   <BlogPost
                     key={post.meta.slug}
                     href={`/posts/${post.meta.slug}`}

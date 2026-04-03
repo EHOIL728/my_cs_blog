@@ -2,6 +2,7 @@
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { BlogPost } from "@/app/components/BlogPost";
+import { getCategoryConfig, getSubcategoryConfig } from "@/lib/categories";
 import { getAllPosts, slugify } from "@/lib/posts";
 
 type CategoryPageProps = {
@@ -11,6 +12,15 @@ type CategoryPageProps = {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category, subcategory = [] } = await params;
   const tagSlug = subcategory[0];
+  const categoryConfig = getCategoryConfig(category);
+  const subcategoryConfig = tagSlug
+    ? getSubcategoryConfig(category, tagSlug)
+    : null;
+
+  if (!categoryConfig || (tagSlug && !subcategoryConfig)) {
+    notFound();
+  }
+
   const posts = await getAllPosts();
   const filtered = posts.filter((post) => {
     const categoryMatches = slugify(post.meta.category) === category;
@@ -21,15 +31,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     return tagSlug ? categoryMatches && tagMatches : categoryMatches;
   });
 
-  if (filtered.length === 0) {
-    notFound();
-  }
-
   const pageTitle = tagSlug
-    ? `${filtered[0].meta.category} / ${
-        filtered[0].meta.tags.find((tag) => slugify(tag) === tagSlug) ?? tagSlug
-      }`
-    : filtered[0].meta.category;
+    ? `${categoryConfig.name} / ${subcategoryConfig?.name ?? tagSlug}`
+    : categoryConfig.name;
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-14">
@@ -53,19 +57,30 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-5">
-        {filtered.map((post) => (
-          <BlogPost
-            key={post.meta.slug}
-            href={`/posts/${post.meta.slug}`}
-            title={post.meta.title}
-            excerpt={post.meta.excerpt}
-            date={post.meta.date}
-            readTime={post.meta.readTime ?? "5 min"}
-            category={post.meta.category}
-          />
-        ))}
-      </div>
+      {filtered.length > 0 ? (
+        <div className="mt-8 grid gap-5">
+          {filtered.map((post) => (
+            <BlogPost
+              key={post.meta.slug}
+              href={`/posts/${post.meta.slug}`}
+              title={post.meta.title}
+              excerpt={post.meta.excerpt}
+              date={post.meta.date}
+              readTime={post.meta.readTime ?? "5 min"}
+              category={post.meta.category}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="mt-8 rounded-[2rem] border border-dashed border-sky-300 bg-sky-50/60 px-8 py-16 text-center dark:border-zinc-700 dark:bg-zinc-900/40">
+          <p className="text-lg text-zinc-700 dark:text-zinc-300">
+            아직 이 카테고리에는 글이 없습니다.
+          </p>
+          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
+            다음 글부터 이 구조에 맞춰 천천히 쌓아가면 됩니다.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

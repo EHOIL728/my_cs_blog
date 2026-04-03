@@ -3,53 +3,7 @@
 import { ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-interface Category {
-  name: string;
-  slug: string;
-  subcategories: { name: string; slug: string }[];
-}
-
-const categories: Category[] = [
-  {
-    name: "Data Analysis",
-    slug: "data-analysis",
-    subcategories: [
-      { name: "Pandas", slug: "pandas" },
-      { name: "NumPy", slug: "numpy" },
-      { name: "Tableau", slug: "tableau" },
-      { name: "Excel", slug: "excel" },
-    ],
-  },
-  {
-    name: "Machine Learning",
-    slug: "machine-learning",
-    subcategories: [
-      { name: "Scikit-learn", slug: "scikit-learn" },
-      { name: "TensorFlow", slug: "tensorflow" },
-      { name: "PyTorch", slug: "pytorch" },
-      { name: "Model Evaluation", slug: "model-evaluation" },
-    ],
-  },
-  {
-    name: "Visualization",
-    slug: "visualization",
-    subcategories: [
-      { name: "Matplotlib", slug: "matplotlib" },
-      { name: "Seaborn", slug: "seaborn" },
-      { name: "Plotly", slug: "plotly" },
-    ],
-  },
-  {
-    name: "Database",
-    slug: "database",
-    subcategories: [
-      { name: "SQL", slug: "sql" },
-      { name: "PostgreSQL", slug: "postgresql" },
-      { name: "Query Optimization", slug: "query-optimization" },
-    ],
-  },
-];
+import { categories } from "@/lib/categories";
 
 interface SidebarProps {
   onClose: () => void;
@@ -93,18 +47,21 @@ export function Sidebar({ onClose }: SidebarProps) {
                 </button>
                 <button
                   onClick={() => toggleCategory(category.slug)}
+                  disabled={category.subcategories.length === 0}
                   className="text-zinc-400 transition-colors hover:text-zinc-700 dark:hover:text-zinc-200"
                 >
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${
-                      expandedCategory === category.slug ? "rotate-180" : ""
-                    }`}
-                  />
+                  {category.subcategories.length > 0 ? (
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${
+                        expandedCategory === category.slug ? "rotate-180" : ""
+                      }`}
+                    />
+                  ) : null}
                 </button>
               </div>
             </div>
 
-            {expandedCategory === category.slug ? (
+            {category.subcategories.length > 0 && expandedCategory === category.slug ? (
               <div className="bg-sky-50 py-2 dark:bg-zinc-900">
                 {category.subcategories.map((subcategory) => (
                   <button
