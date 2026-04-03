@@ -16,8 +16,8 @@ import { Sidebar } from "./Sidebar";
 import { ThemeToggle } from "./ThemeToggle";
 
 const socialLinks = {
-  github: "https://github.com/your-username",
-  linkedin: "https://www.linkedin.com/in/your-profile",
+  github: "https://github.com/ehoil-de",
+  linkedin: "https://www.linkedin.com/in/tae-in-jeong-20a927400/",
 };
 
 export function Header() {
